@@ -68,7 +68,7 @@
 
   <middle>
     <section anchor="introduction" title="Introduction">
-      <t>The HTTP/2 specification defines a priority scheme in  <xref target="RFC7540"/>, Section 5.3, which some implementers have opted not to fully support. The lack of signalling about the status of the implementation has caused several implementations to implement heuristics to detect when the clients they are connected to do not support priorities as defined and take steps to compensate for that. The intent of this draft is to provide and affirmative signalling mechanism for each client to communicate whether or not it supports and will use the priority scheme as defined in  <xref target="RFC7540"/>, Section 5.3.</t>
+      <t>The HTTP/2 specification defines a priority scheme in  <xref target="RFC7540"/>, Section 5.3, which some implementers have opted not to fully support. The lack of signalling about the status of the implementation has encouraged some servers to use heuristics in order to detect when the clients they are connected to do not support priorities as defined and take steps to compensate for that. The intent of this draft is to provide and affirmative signalling mechanism for each client to communicate whether or not it supports and will use the priority scheme as defined in  <xref target="RFC7540"/>, Section 5.3.</t>
     </section>
     <section anchor="terminology" title="Terminology">
       <t> The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",

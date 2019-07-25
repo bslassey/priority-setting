@@ -10,7 +10,7 @@ Expires: January 26, 2020                                     Cloudflare
 
 
                 Declaring Support for HTTP/2 Priorities
-                     draft-lassey-priority-setting-00
+                    draft-lassey-priority-setting-00
 
 Abstract
 
