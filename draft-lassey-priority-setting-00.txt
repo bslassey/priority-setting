@@ -94,13 +94,13 @@ Table of Contents
    [RFC7540], Section 6.5.2.
 
    The new parameter name is SETTINGS_ENABLE_HTTP2_PRIORITIES.  The
-   value of the paramater is a bit mask representing the prioritiy
+   value of the paramater is a bitmask representing the prioritiy
    schemes that the peer supports.  At this time two values are defined,
    0x0 which represents not supporting any priority schemes and 0x1,
    which represents support for priorities as defined in [RFC7540].
    Other values may be defined later.
 
-   If both peers send values for this setting, they must each bitwise
+   If both peers send values for this setting, they MUST each bitwise
    AND the two values, which then reveals the intersection of the
    supported schemes between the two.  If the result of that bitwise AND
    is zero, clients SHOULD NOT send priority frames and servers SHOULD
