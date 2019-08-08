@@ -80,8 +80,8 @@
     <section anchor="parameter" title="The SETTINGS_ENABLE_HTTP2_PRIORITIES SETTINGS Parameter">
       <t>This document adds a new SETTINGS parameter to those defined by
       <xref target="RFC7540"/>, Section 6.5.2.</t>
-      <t>The new parameter name is SETTINGS_ENABLE_HTTP2_PRIORITIES.  The
-      value of the parameter MUST be 0 or 1 to indicate not supporting or supporting HTTP/2 priorities respectively. If either side sends the parameter with a value of 0, clients SHOULD NOT send priority frames and servers SHOULD NOT make any assumptions based on the presence or lack thereof of priority frames. If both sides send the parameter with a value of 1, then both parties MAY use HTTP/2 priorities as they see fit. A sender MUST NOT send the parameter   with the value of 0 after previously sending a value of 1. If a client or server does not send the setting, the peer SHOULD NOT make any assumptions about its support for HTTP/2 priorities.</t>
+      <t>The new parameter name is SETTINGS_ENABLE_HTTP2_PRIORITIES. The value of the paramater is a bit mask representing the prioritiy schemes that the peer supports. At this time two values are defined, 0x0 which represents not supporting any priority schemes and 0x1, which represents support for priorities as defined in <xref target="RFC7540"/>. Other values may be defined later.</t>
+      <t>If both peers send values for this setting, they must each bitwise AND the two values, which then reveals the intersection of the supported schemes between the two. If the result of that bitwise AND is zero, clients SHOULD NOT send priority frames and servers SHOULD NOT make any assumptions based on the presence or lack thereof of priority frames. If the value is non-zero, the highest order bit that is set to 1 will represent the negotiated priority scheme. If a client or server does not send the setting, the peer SHOULD NOT make any assumptions about its support for HTTP/2 priorities.</t>
     </section>
     <section anchor="IANA" title="IANA Considerations">
       <section anchor="setting" title="A New HTTP/2 Setting">

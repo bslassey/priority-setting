@@ -73,12 +73,12 @@ Table of Contents
    The HTTP/2 specification defines a priority scheme in [RFC7540],
    Section 5.3, which some implementers have opted not to fully support.
    The lack of signalling about the status of the implementation has
-   caused several implementations to implement heuristics to detect when
-   the clients they are connected to do not support priorities as
-   defined and take steps to compensate for that.  The intent of this
-   draft is to provide and affirmative signalling mechanism for each
-   client to communicate whether or not it supports and will use the
-   priority scheme as defined in [RFC7540], Section 5.3.
+   encouraged some servers to use heuristics in order to detect when the
+   clients they are connected to do not support priorities as defined
+   and take steps to compensate for that.  The intent of this draft is
+   to provide and affirmative signalling mechanism for each client to
+   communicate whether or not it supports and will use the priority
+   scheme as defined in [RFC7540], Section 5.3.
 
 2.  Terminology
 
@@ -94,18 +94,18 @@ Table of Contents
    [RFC7540], Section 6.5.2.
 
    The new parameter name is SETTINGS_ENABLE_HTTP2_PRIORITIES.  The
-   value of the parameter MUST be 0 or 1 to indicate not supporting or
-   supporting HTTP/2 priorities respectively.  If either side sends the
-   parameter with a value of 0, clients SHOULD NOT send priority frames
-   and servers SHOULD NOT make any assumptions based on the presence or
-   lack thereof of priority frames.  If both sides send the parameter
-   with a value of 1, then both parties MAY use HTTP/2 priorities as
-   they see fit.  A sender MUST NOT send the parameter with the value of
-   0 after previously sending a value of 1.  If a client or server does
-   not send the setting, the peer SHOULD NOT make any assumptions about
-   its support for HTTP/2 priorities.
+   value of the paramater is a bit mask representing the prioritiy
+   schemes that the peer supports.  At this time two values are defined,
+   0x0 which represents not supporting any priority schemes and 0x1,
+   which represents support for priorities as defined in [RFC7540].
+   Other values may be defined later.
 
-
+   If both peers send values for this setting, they must each bitwise
+   AND the two values, which then reveals the intersection of the
+   supported schemes between the two.  If the result of that bitwise AND
+   is zero, clients SHOULD NOT send priority frames and servers SHOULD
+   NOT make any assumptions based on the presence or lack thereof of
+   priority frames.  If the value is non-zero, the highest order bit
 
 
 
@@ -113,6 +113,10 @@ Lassey & Pardue         Expires January 26, 2020                [Page 2]
 
 Internet-Draft   Declaring Support for HTTP/2 Priorities       July 2019
 
+
+   that is set to 1 will represent the negotiated priority scheme.  If a
+   client or server does not send the setting, the peer SHOULD NOT make
+   any assumptions about its support for HTTP/2 priorities.
 
 4.  IANA Considerations
 
@@ -157,10 +161,6 @@ Authors' Addresses
    Cloudflare
 
    Email: lucaspardue.24.7@gmail.com
-
-
-
-
 
 
 
